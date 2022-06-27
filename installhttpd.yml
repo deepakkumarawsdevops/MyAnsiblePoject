@@ -1,0 +1,33 @@
+---
+- name: Update AWS Server
+  hosts: web1
+  become: yes
+
+  tasks:
+  - name: Install httpd 
+    yum:
+     name: httpd
+     state: present
+    when: ansible_distribution == "Centos" or  ansible_distribution == "Amazon"
+
+  - name: Start httpd
+    service:
+     name: httpd
+     state: started
+    when: ansible_distribution == "Centos" or  ansible_distribution == "Amazon"
+
+
+  - name: Enable httpd
+    service:
+     name: httpd
+     enabled: yes
+    when: ansible_distribution == "Centos" or  ansible_distribution == "Amazon"
+
+
+  
+        
+
+
+
+
+...
